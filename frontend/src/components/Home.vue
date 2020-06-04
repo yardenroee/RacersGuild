@@ -1,6 +1,11 @@
 <template>
   <div class="main">
-    <h1>Racer's Guild 2020</h1>
+    <h1>Yarden's Racer's Guild 2020</h1>
+    <div :style="{width: '100%', display :'flex', justifyContent: 'center'}">
+      <a href="https://github.com/yardenroee/RacersGuild/tree/master/frontend" target="_blank" >
+        <img src="../assets/logo.svg" width="50px" />
+      </a>
+    </div>
     <div class="toggle-buttons">
       <!-- TOGGLE BUTTONS ACTIVE CLASS CONDITIONAL RENDERING -->
       <button class="btn" :class="{active: events}" @click="toggleButtons('events')">Event</button>
@@ -22,7 +27,8 @@
             <p>Location: {{event.location}}</p>
             <p>
               Winner: {{event.winner}}
-              (<span>{{event.score}}</span>)
+              (
+              <span>{{event.score}}</span>)
             </p>
             <!--  ADDED DATE FORMATTING FUNCTION  -->
             <p>Date: {{formatDate(event.date)}}</p>
