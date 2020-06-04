@@ -2,7 +2,7 @@
   <div class="main">
     <h1>Racer's Guild 2020</h1>
     <div class="toggle-buttons">
-        <!-- TOGGLE BUTTONS ACTIVE CLASS CONDITIONAL RENDERING -->
+      <!-- TOGGLE BUTTONS ACTIVE CLASS CONDITIONAL RENDERING -->
       <button class="btn" :class="{active: events}" @click="toggleButtons('events')">Event</button>
       <button
         class="btn"
@@ -11,39 +11,47 @@
       >Leader Board</button>
     </div>
     <!-- conditional rendering if events is true -->
-    <div v-if="events" class="events">
+    <transition name="fade">
+      <div v-if="events" class="events">
         <!-- for loop on events in event list -->
-      <div v-for="(event,i) in eventList" :key="i" class="event-card">
-        <div class="title">
-          <h3>{{event.name}}</h3>
-        </div>
-        <div class="details">
-          <p>Location: {{event.location}}</p>
-          <p>Winner: {{event.winner}}</p>
-          <!--  ADDED DATE FORMATTING FUNCTION  -->
-          <p>Date: {{formatDate(event.date)}}</p>
-        </div>
-      </div>
-    </div>
-
-<!-- conditional rendering if leaderboard true -->
-    <div v-if="leaderBoard" class="leaderboard">
-      <div class="racer" v-for="(racer, i) in racers" :key="i">
-        <label>{{i+1}}</label>
-        <ul>
-          <div class="racer-card">
-              <!-- dynamically get image from images folder -->
-            <img :src="require(`../assets/images/${racer.name.toLowerCase()}.jpg`)" />
-            <p>{{racer.name}}</p>
+        <div v-for="(event,i) in eventList" :key="i" class="event-card">
+          <div class="title">
+            <h3>{{event.name}}</h3>
           </div>
-        </ul>
-        <div class="racer-info">
-            <!-- width will be calculated based upon high score and max-width of the screen -->
-          <span :style="{backgroundColor: `rgb(${racer.color})`, width: `calc(${racer.high_score}px - 900px)`}">{{racer.high_score}}</span>
-          <p>"{{racer.quote}}"</p>
+          <div class="details">
+            <p>Location: {{event.location}}</p>
+            <p>
+              Winner: {{event.winner}}
+              (<span>{{event.score}}</span>)
+            </p>
+            <!--  ADDED DATE FORMATTING FUNCTION  -->
+            <p>Date: {{formatDate(event.date)}}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
+    <!-- conditional rendering if leaderboard true -->
+    <transition name="fade">
+      <div v-if="leaderBoard" class="leaderboard">
+        <div class="racer" v-for="(racer, i) in racers" :key="i">
+          <label>{{i+1}}</label>
+          <ul>
+            <div class="racer-card">
+              <!-- dynamically get image from images folder -->
+              <img :src="require(`../assets/images/${racer.name.toLowerCase()}.jpg`)" />
+              <p>{{racer.name}}</p>
+            </div>
+            <div class="info-wrapper">
+              <div class="racer-info" :style="{width: `${(decrement-i-.5)* 10}%`}">
+                <!-- width will be calculated based upon place calculated in percentage .5 added for cleaner styling -->
+                <span :style="{backgroundColor: `rgb(${racer.color})`}">{{racer.high_score}}</span>
+              </div>
+              <p :style="{width: '100%', fontWeight: 'bold'}">"{{racer.quote}}"</p>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -51,10 +59,11 @@
 export default {
   data() {
     return {
-      events: false,
-      leaderBoard: true,
-    //  i decided to copy and paste the data since it was small enough to have on file
-    // but if the data sets were too lengthy I would have used imported the file into here
+      events: true,
+      leaderBoard: false,
+      decrement: 10,
+      //  i decided to copy and paste the data since it was small enough to have on file
+      // but if the data sets were too lengthy I would have used imported the file into here
       eventList: [
         {
           name: "Race Mania",
@@ -214,6 +223,9 @@ export default {
       color: rgb(118, 118, 118);
       font-size: 18px;
       padding: 10px 60px;
+      @media screen and (max-width: 800px) {
+        padding: 10px 22px;
+      }
       &:focus {
         outline: transparent 1px !important;
       }
@@ -233,20 +245,39 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    @media screen and (max-width: 800px) {
+      //   justify-content: space-around;
+    }
     .event-card {
       width: 27%;
       display: flex;
       flex-direction: column;
       border: 1px solid rgb(118, 118, 118);
       margin-bottom: 25px;
+      @media screen and (max-width: 800px) {
+        width: 47%;
+      }
       .title {
         text-align: center;
         border-bottom: 1px solid rgb(118, 118, 118);
         padding: 10px 0;
+        h3 {
+          @media screen and (max-width: 800px) {
+            font-size: 15px;
+          }
+        }
       }
       .details {
         padding: 10px 0 0 5px;
         background-color: rgb(204, 204, 204);
+        p {
+          @media screen and (max-width: 800px) {
+            font-size: 14px;
+          }
+          span {
+            font-weight: bold;
+          }
+        }
       }
     }
   }
@@ -255,12 +286,30 @@ export default {
     .racer {
       display: flex;
       align-items: center;
+      flex-direction: row;
+      ul {
+        width: 100%;
+        display: flex;
+        .info-wrapper {
+          width: 100%;
+        }
+        @media screen and (max-width: 800px) {
+          flex-wrap: wrap;
+        }
+      }
+      @media screen and (max-width: 800px) {
+        p {
+          font-size: 15px;
+        }
+      }
       label {
         font-weight: bold;
       }
       .racer-card {
         border: 1px solid rgb(118, 118, 118);
         margin-right: 40px;
+        max-width: 110px;
+
         img {
           width: 110px;
           border-bottom: 1px solid rgb(118, 118, 118);
@@ -274,6 +323,9 @@ export default {
       .racer-info {
         display: flex;
         flex-direction: column;
+        @media screen and (max-width: 800px) {
+          margin-top: 15px;
+        }
         p {
           font-weight: bold;
         }
