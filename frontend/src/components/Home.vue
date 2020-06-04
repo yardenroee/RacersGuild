@@ -2,6 +2,7 @@
   <div class="main">
     <h1>Racer's Guild 2020</h1>
     <div class="toggle-buttons">
+        <!-- TOGGLE BUTTONS ACTIVE CLASS CONDITIONAL RENDERING -->
       <button class="btn" :class="{active: events}" @click="toggleButtons('events')">Event</button>
       <button
         class="btn"
@@ -9,7 +10,9 @@
         @click="toggleButtons('leader')"
       >Leader Board</button>
     </div>
+    <!-- conditional rendering if events is true -->
     <div v-if="events" class="events">
+        <!-- for loop on events in event list -->
       <div v-for="(event,i) in eventList" :key="i" class="event-card">
         <div class="title">
           <h3>{{event.name}}</h3>
@@ -23,16 +26,19 @@
       </div>
     </div>
 
+<!-- conditional rendering if leaderboard true -->
     <div v-if="leaderBoard" class="leaderboard">
       <div class="racer" v-for="(racer, i) in racers" :key="i">
         <label>{{i+1}}</label>
         <ul>
           <div class="racer-card">
+              <!-- dynamically get image from images folder -->
             <img :src="require(`../assets/images/${racer.name.toLowerCase()}.jpg`)" />
             <p>{{racer.name}}</p>
           </div>
         </ul>
         <div class="racer-info">
+            <!-- width will be calculated based upon high score and max-width of the screen -->
           <span :style="{backgroundColor: `rgb(${racer.color})`, width: `calc(${racer.high_score}px - 900px)`}">{{racer.high_score}}</span>
           <p>"{{racer.quote}}"</p>
         </div>
@@ -47,6 +53,8 @@ export default {
     return {
       events: false,
       leaderBoard: true,
+    //  i decided to copy and paste the data since it was small enough to have on file
+    // but if the data sets were too lengthy I would have used imported the file into here
       eventList: [
         {
           name: "Race Mania",
@@ -153,6 +161,7 @@ export default {
     await this.sortRacers();
   },
   methods: {
+    //   conditional toggling based on status
     toggleButtons(target) {
       if (target === "events") {
         if (this.events) {
@@ -172,6 +181,7 @@ export default {
         }
       }
     },
+    // date format function using standard JS date object
     formatDate(date) {
       let newDate = new Date(date);
       let day = newDate.getDate();
