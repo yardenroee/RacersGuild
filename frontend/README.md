@@ -19,9 +19,45 @@ I liked that there were nice little challenges within the provided data that req
   #
   ``SCSS``
   SCSS is perhaps the most intuitive understanding of CSS. The syntax is really light on the user, and is very flexible while allowing for clean code base through nesting.
-  
 
-## But if you'd like to install locally here is how:
+### Design Choices I Made:
+```
+@keyframes grow{
+    0% {
+        width: 0;
+    }
+    100%{
+        width: 97%;
+    }
+}
+```
+Simple grow animation for the score bar for each player.
+#
+```
+<number ref="number1" :from="0" :to="racer.high_score" :duration="2" />
+```
+Number component that increases as the animation bar progresses.
+#
+```
+<HTML>
+<transition name="fade">
+  <div>
+    ...
+  </div>
+</transition>
+
+<SCSS>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+```
+Simple transition between the Leaderboard and the Events.
+
+## If you'd like to install locally here is how:
 ## Project setup
 ```
 npm install
