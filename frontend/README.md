@@ -13,8 +13,10 @@ I liked that there were nice little challenges within the data sets that require
 ### Technical Choices I Made:
   ``Vue.JS``
   Vue as a framework is my go to choice. I feel that it is the most digestible for both the developer and perhaps a peer who is looking/reviewing at the code as it is readable and aligns with a simple HTML construct rather than complex frameworks that are very syntax heavy.
+  #
   ``Firebase``
   I used Firebase to deploy because it is a tool that I am very familiar with, as well as free to deploy. The Firebase CLI makes it easy to deploy from the local machine so long you have right configuration, which can be generated through simple shell prompts. 
+  #
   ``SCSS``
   SCSS is perhaps the most intuitive understanding of CSS. The syntax is really light on the user, and is very flexible while allowing for clean code base through nesting.
   
