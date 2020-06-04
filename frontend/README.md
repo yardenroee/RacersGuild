@@ -8,7 +8,7 @@ I have dployed this project to https://racers-guild.web.app/ to skip the process
 ## Dev Notes:
 This project was a lot of fun to work on. I felt that the assignment and instructions were straight-forward but left a lot of room for imagination with how to implement the solution. I decided that, for the sake of time, I would maintain the design as layed out by the screenshots, but I also made some design decisions that were implied by the layout itself (transitions, flex, pointers, etc.) to smooth out the app.
 
-I liked that there were nice little challenges within the data sets that required more complex logic rather than just plugging in values where they belong. I enjoyed writing a sorting function to sort players based upon score, I enjoyed creating a huamn readable date from the UTC format, and I liked that I had to add a color attribute to each player's object. All of those little "quirks" made the assignment really enjoyable for me and I commend the creator of the assignment for thinking of those challanges.
+I liked that there were nice little challenges within the provided data that required more complex logic rather than just plugging in values where they belong. I enjoyed writing a sorting function to sort players based upon score, I enjoyed creating a huamn readable date from the UTC format, and I liked that I had to add a color attribute to each player's object, as well as using the name from the object with a `.toLowerCase()` function to properly route the images. All of those little "quirks" made the assignment really enjoyable for me and I commend the creator of the assignment for thinking of those challanges.
 
 ### Technical Choices I Made:
   ``Vue.JS``
