@@ -27,8 +27,7 @@
             <p>Location: {{event.location}}</p>
             <p>
               Winner: {{event.winner}}
-              (
-              <span>{{event.score}}</span>)
+              (<span>{{event.score}}</span>)
             </p>
             <!--  ADDED DATE FORMATTING FUNCTION  -->
             <p>Date: {{formatDate(event.date)}}</p>
