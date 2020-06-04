@@ -1,8 +1,10 @@
 <template>
   <div class="main">
     <h1>Yarden's Racer's Guild 2020</h1>
-    <div :style="{width: '100%', display :'flex', justifyContent: 'center'}">
-      <a href="https://github.com/yardenroee/RacersGuild/tree/master/frontend" target="_blank" >
+    <div
+      :style="{width: '100%', display :'flex', justifyContent: 'center',    marginBottom: '15px'}"
+    >
+      <a href="https://github.com/yardenroee/RacersGuild/tree/master/frontend" target="_blank">
         <img src="../assets/logo.svg" width="50px" />
       </a>
     </div>
@@ -49,7 +51,9 @@
             <div class="info-wrapper">
               <div class="racer-info" :style="{width: `${(decrement-i-.5)* 10}%`}">
                 <!-- width will be calculated based upon place calculated in percentage .5 added for cleaner styling -->
-                <span :style="{backgroundColor: `rgb(${racer.color})`}">{{racer.high_score}}</span>
+                <span :style="{backgroundColor: `rgb(${racer.color})`}">
+                  <number ref="number1" :from="0" :to="racer.high_score" :duration="2" />
+                </span>
               </div>
               <p :style="{width: '100%', fontWeight: 'bold'}">"{{racer.quote}}"</p>
             </div>
@@ -62,6 +66,7 @@
 
 <script>
 export default {
+  components: {},
   data() {
     return {
       events: true,
@@ -175,6 +180,12 @@ export default {
     await this.sortRacers();
   },
   methods: {
+    increaseScore(score) {
+      let runningScore = 0;
+      while (runningScore <= score) {
+        runningScore += 1;
+      }
+    },
     //   conditional toggling based on status
     toggleButtons(target) {
       if (target === "events") {
@@ -338,7 +349,14 @@ export default {
           border: 1px solid rgb(118, 118, 118);
           color: white;
           text-align: right;
+          animation: grow 2s linear;
+          @media screen and (max-width: 800px) {
+            animation: growMobile 2s linear;
+          }
           padding: 10px;
+          span {
+            border: none;
+          }
         }
       }
     }

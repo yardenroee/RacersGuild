@@ -21,3 +21,22 @@ button {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+@keyframes grow{
+    0% {
+        width: 0;
+    }
+    100%{
+        width: 97%;
+    }
+}
+
+
+@keyframes growMobile{
+    0% {
+        width: 0;
+    }
+    100%{
+        width: 92%;
+    }
+}
